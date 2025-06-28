@@ -1,0 +1,36 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.shuyanmc.mpem.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "server": [
+    "DFUKiller",
+    "InventoryMixin",
+    "ItemCC",
+    "ItemEntityMixin",
+    "ItemStackMixin",
+    "MixinASMEventHandler",
+    "MixinBoat",
+    "MixinEventBus",
+    "MixinServerLevel"
+  ],
+  "client": [
+    "DFUKiller",
+    "InventoryMixin",
+    "ItemCC",
+    "ItemEntityMixin",
+    "ItemStackMixin",
+    "mcmixinx",
+    "MixinASMEventHandler",
+    "MixinBlockUpdatePacket",
+    "MixinBoat",
+    "MixinEventBus",
+    "uimixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}
