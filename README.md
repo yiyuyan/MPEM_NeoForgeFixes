@@ -6,8 +6,8 @@
 ### Minecraft Performance Enhancement Mod
 
 ## 🌍 Languages  
-- [English](#english)  
 - [中文](#中文)  
+- [English](#english)  
 - [한국어](#한국어)  
 - [日本語](#日本語)  
 - [हिन्दी](#हिन्दी)  
