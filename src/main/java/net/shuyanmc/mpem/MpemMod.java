@@ -198,51 +198,6 @@ public class MpemMod {
         //NeoForge.EVENT_BUS.register(new ClientEventListener());
     }
 
-    @OnlyIn(Dist.CLIENT)
-    @SubscribeEvent
-    public void onPlayerLogin(ClientPlayerNetworkEvent.LoggingIn event) {
-        if (Minecraft.getInstance().isSingleplayer()) {
-            return;
-        }
-
-        LOGGER.debug("玩家登录事件触发，准备启动反作弊检测");
-        AsyncEventSystem.executeAsync(
-                ClientPlayerNetworkEvent.LoggingIn.class,
-                () -> {
-                    try {
-                        TimeUnit.SECONDS.sleep(CoolConfig.DETECTION_DELAY.get());
-                        if (Minecraft.getInstance().getConnection() != null) {
-                            LOGGER.info("开始执行客户端反作弊扫描...");
-                            CheatDetector.runClientDetection();
-                        }
-                    } catch (InterruptedException e) {
-                        Thread.currentThread().interrupt();
-                        LOGGER.warn("检测线程被中断");
-                    } catch (Exception e) {
-                        LOGGER.error("反作弊检测失败", e);
-                    }
-                }
-        );
-    }
-
-    private void warmUpClasses() {
-        long start = System.currentTimeMillis();
-        String[] classesToWarm = {
-                "net.minecraft.world.level.block.Block",
-                "net.minecraft.world.item.Item",
-                "net.minecraft.world.entity.EntityType",
-                "net.minecraft.core.Registry"
-        };
-
-        for (String className : classesToWarm) {
-            try {
-                Class.forName(className);
-            } catch (ClassNotFoundException e) {
-                LOGGER.debug("Warmup class not found: {}", className);
-            }
-        }
-        LOGGER.debug("Class warmup completed in {}ms", System.currentTimeMillis() - start);
-    }
 
     private void registerCommands(RegisterCommandsEvent event) {
         event.getDispatcher().register(Commands.literal("spawnT2")
