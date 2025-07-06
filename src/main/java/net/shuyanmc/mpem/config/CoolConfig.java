@@ -21,6 +21,15 @@ public class CoolConfig {
     public static final ModConfigSpec.BooleanValue OPTIMIZE_ENTITY_CLEANUP;
     public static final ModConfigSpec.BooleanValue reduceEntityUpdates;
 
+    // 新增实体优化配置
+    public static ModConfigSpec.BooleanValue optimizeEntities;
+    public static ModConfigSpec.BooleanValue ignoreDeadEntities;
+    public static ModConfigSpec.BooleanValue optimizeItems;
+    public static ModConfigSpec.ConfigValue<List<? extends String>> itemWhitelist;
+    public static ModConfigSpec.IntValue horizontalRange;
+    public static ModConfigSpec.IntValue verticalRange;
+    public static ModConfigSpec.BooleanValue tickRaidersInRaid;
+
     // ==================== 物品优化 | Item Optimization ====================
     public static ModConfigSpec.IntValue maxStackSize;
     public static ModConfigSpec.DoubleValue mergeDistance;
@@ -69,6 +78,16 @@ public class CoolConfig {
     public static final ModConfigSpec.ConfigValue<List<? extends String>> MOD_WHITELIST;
     public static final ModConfigSpec.BooleanValue CLASS_NAME_DETECTION_ENABLED;
 
+    // ==================== 帧率控制 | Frame Rate Control ====================
+    public static final ModConfigSpec.BooleanValue REDUCE_FPS_WHEN_INACTIVE;
+    public static final ModConfigSpec.IntValue INACTIVE_FPS_LIMIT;
+
+    // ==================== 渲染距离 | Render Distance ====================
+    public static final ModConfigSpec.BooleanValue REDUCE_RENDER_DISTANCE_WHEN_INACTIVE;
+    public static final ModConfigSpec.IntValue INACTIVE_RENDER_DISTANCE;
+
+
+
     static {
         // ==================== 实体优化设置 | Entity Optimization Settings ====================
         BUILDER.comment("实体优化设置 | Entity Optimization Settings").push("entity_optimization");
@@ -93,7 +112,65 @@ public class CoolConfig {
                 .comment("减少远处实体的同步频率 | Reduce entity sync frequency for distant entities")
                 .define("reduceEntityUpdates", true);
 
+        // 新增实体优化配置
+        optimizeEntities = BUILDER
+                .comment("是否优化实体tick | Optimize entity ticking")
+                .define("optimizeEntities", true);
+
+        ignoreDeadEntities = BUILDER
+                .comment("是否忽略已死亡的实体 | Ignore dead entities")
+                .define("ignoreDeadEntities", false);
+
+        optimizeItems = BUILDER
+                .comment("是否优化物品实体 | Optimize item entities")
+                .define("optimizeItems", true);
+
+        itemWhitelist = BUILDER
+                .comment("物品白名单（不会被优化的物品）| Item whitelist (items that will not be optimized)")
+                .defineList("itemWhitelist", Collections.singletonList("minecraft:nether_star"),
+                        o -> o instanceof String);
+
+        horizontalRange = BUILDER
+                .comment("实体激活范围（水平方向）| Horizontal activation range for entities (blocks)")
+                .defineInRange("horizontalRange", 32, 8, 128);
+
+        verticalRange = BUILDER
+                .comment("实体激活范围（垂直方向）| Vertical activation range for entities (blocks)")
+                .defineInRange("verticalRange", 16, 8, 64);
+
+        tickRaidersInRaid = BUILDER
+                .comment("在袭击中是否强制tick袭击者 | Force tick raiders during raids")
+                .define("tickRaidersInRaid", true);
+
         BUILDER.pop();
+
+        // ==================== 帧率控制设置 | Frame Rate Control Settings ====================
+        BUILDER.comment("帧率控制设置 | Frame Rate Control Settings").push("frame_rate");
+
+        REDUCE_FPS_WHEN_INACTIVE = BUILDER
+                .comment("是否在窗口非活动时降低FPS | Reduce FPS when window is inactive")
+                .define("reduceFpsWhenInactive", true);
+
+        INACTIVE_FPS_LIMIT = BUILDER
+                .comment("非活动状态时的FPS限制 | FPS limit when inactive")
+                .defineInRange("inactiveFpsLimit", 30, 5, 120);
+
+        BUILDER.pop();
+
+        // ==================== 渲染距离设置 | Render Distance Settings ====================
+        BUILDER.comment("渲染距离设置 | Render Distance Settings").push("render_distance");
+
+        REDUCE_RENDER_DISTANCE_WHEN_INACTIVE = BUILDER
+                .comment("是否在窗口非活动时降低渲染距离 | Reduce render distance when window is inactive")
+                .define("reduceRenderDistanceWhenInactive", true);
+
+        INACTIVE_RENDER_DISTANCE = BUILDER
+                .comment("非活动状态时的渲染距离 | Render distance when inactive")
+                .defineInRange("inactiveRenderDistance", 4, 2, 32);
+
+        BUILDER.pop();
+
+
 
         // ==================== 物品优化设置 | Item Optimization Settings ====================
         BUILDER.comment("物品优化设置 | Item Optimization Settings").push("item_optimization");

@@ -25,7 +25,9 @@
     "MixinBlockUpdatePacket",
     "MixinBoat",
     "MixinEventBus",
-    "uimixin"
+    "uimixin",
+    "client.MinecraftMixin",
+    "client.OptionsMixin"
   ],
   "injectors": {
     "defaultRequire": 1
@@ -34,6 +36,7 @@
     "requireAnnotations": true
   },
   "mixins": [
-    "EnchantmentMenuMixin"
+    "EnchantmentMenuMixin",
+    "LevelMixin"
   ]
 }
