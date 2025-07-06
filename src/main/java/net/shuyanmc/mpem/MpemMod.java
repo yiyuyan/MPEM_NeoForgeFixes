@@ -1,5 +1,6 @@
 package net.shuyanmc.mpem;
 
+import net.minecraft.FileUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.coordinates.Vec3Argument;
@@ -28,10 +29,13 @@ import net.shuyanmc.mpem.client.ItemCountRenderer;
 import net.shuyanmc.mpem.config.CoolConfig;
 import net.shuyanmc.mpem.events.ModEventHandlers;
 import net.shuyanmc.mpem.particles.AsyncParticleHandler;
+import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.spongepowered.asm.launch.MixinBootstrap;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.AbstractMap;
 import java.util.Collection;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -49,6 +53,8 @@ public class MpemMod {
     private static BlockPos protectedAreaStart = new BlockPos(0, 0, 0);
     private static BlockPos protectedAreaEnd = new BlockPos(0, 0, 0);
     private static boolean optimizationEnabled = false;
+
+    public static File MPEM_EVENTS_LOG = new File("log/mpem-event-debug.log");
     /*
     public static final SimpleChannel PACKET_HANDLER = NetworkRegistry.newSimpleChannel(
             new ResourceLocation(MODID, MODID),
@@ -59,6 +65,13 @@ public class MpemMod {
     private static int messageID = 0;
 
     public MpemMod(ModContainer container) {
+
+        try {
+            FileUtils.writeStringToFile(MPEM_EVENTS_LOG,"");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         IEventBus modEventBus = container.getEventBus();
         IEventBus forgeEventBus = NeoForge.EVENT_BUS;
         container.registerConfig(ModConfig.Type.COMMON, CoolConfig.SPEC, "mpem.toml");
@@ -176,7 +189,7 @@ public class MpemMod {
             EventHandlersTRO.registerOptimizedHandlers();
             AsyncEventSystem.initialize();
             ModEventProcessor.processModEvents();
-            warmUpClasses();
+            //warmUpClasses();
         });
     }
 

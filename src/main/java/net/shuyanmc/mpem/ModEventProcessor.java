@@ -7,8 +7,10 @@ import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforgespi.language.ModFileScanData;
 import net.shuyanmc.mpem.config.CoolConfig;
+import org.apache.commons.io.FileUtils;
 import org.objectweb.asm.Type;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.List;
@@ -45,8 +47,22 @@ public class ModEventProcessor {
             }
 
             for (ModFileScanData.AnnotationData ad : scanData.getAnnotations()) {
-                if (SUBSCRIBE_EVENT.equals(ad.annotationType())) {
-                    processAnnotationData(ad, eventMethods);
+                try {
+                    if (SUBSCRIBE_EVENT.equals(ad.annotationType())) {
+                        processAnnotationData(ad, eventMethods);
+                    }
+                } catch (Exception | Error e) {
+                    try {
+                        FileUtils.writeStringToFile(MpemMod.MPEM_EVENTS_LOG,"\n"+ e,true);
+                        for (StackTraceElement stackTraceElement : e.getStackTrace()) {
+                            FileUtils.writeStringToFile(MpemMod.MPEM_EVENTS_LOG,"\n"+stackTraceElement.toString(),true);
+                        }
+                        for (Throwable stackTraceElement : e.getSuppressed()) {
+                            FileUtils.writeStringToFile(MpemMod.MPEM_EVENTS_LOG,"\n"+stackTraceElement.toString(),true);
+                        }
+                    } catch (IOException ex) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }
@@ -74,6 +90,14 @@ public class ModEventProcessor {
 
     private static void processAnnotationData(ModFileScanData.AnnotationData ad, Set<String> eventMethods) {
         String className = ad.clazz().getClassName();
+
+        try {
+            Class.forName(className);
+            System.out.println("TESTED A CLASS: "+className);
+        } catch (ClassNotFoundException | NoClassDefFoundError | ClassCastException e) {
+            AsyncEventSystem.LOGGER.debug("Skip a class: {}",className);
+            return;
+        }
 
         if (PROCESSED_CLASSES.contains(className)) {
             return;
