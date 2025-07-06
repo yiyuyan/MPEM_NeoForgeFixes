@@ -89,13 +89,14 @@ public class ModEventProcessor {
     }
 
     private static void processAnnotationData(ModFileScanData.AnnotationData ad, Set<String> eventMethods) {
-        String className = ad.clazz().getClassName();
+        String className;
 
         try {
+            className = ad.clazz().getClassName();
             Class.forName(className);
             System.out.println("TESTED A CLASS: "+className);
         } catch (ClassNotFoundException | NoClassDefFoundError | ClassCastException e) {
-            AsyncEventSystem.LOGGER.debug("Skip a class: {}",className);
+            AsyncEventSystem.LOGGER.debug("Skipped a class.");
             return;
         }
 
