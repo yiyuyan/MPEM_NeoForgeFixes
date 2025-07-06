@@ -1,23 +1,33 @@
 package net.shuyanmc.mpem.optimization;
 
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.phys.Vec3;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
+import net.neoforged.neoforge.event.entity.EntityLeaveLevelEvent;
+import net.shuyanmc.mpem.config.CoolConfig;
+
+import java.util.Iterator;
+import java.util.Map;
+import java.util.WeakHashMap;
+
 public class EntityOptimizer {
-    /*
     private static final Map<Entity, Long> inactiveEntities = new WeakHashMap<>();
     
     @SubscribeEvent
-    public void onEntityJoin(EntityJoinLevelEvent event) {
+    public static void onEntityJoin(EntityJoinLevelEvent event) {
         if (!CoolConfig.disableEntityCollisions.get()) return;
         
         Entity entity = event.getEntity();
         
         // 禁用新生成实体的碰撞
-        entity.setNoGravity(true);
+        entity.setNoGravity(false);
         entity.noPhysics = false;
         inactiveEntities.put(entity, System.currentTimeMillis());
     }
     
     @SubscribeEvent
-    public void onEntityLeave(EntityLeaveLevelEvent event) {
+    public static void onEntityLeave(EntityLeaveLevelEvent event) {
         inactiveEntities.remove(event.getEntity());
     }
     
@@ -43,5 +53,5 @@ public class EntityOptimizer {
                 entity.setPos(entity.getX(), entity.getY(), entity.getZ());
             }
         }
-    }*/
+    }
 }

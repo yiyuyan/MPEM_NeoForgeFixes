@@ -37,7 +37,7 @@ public abstract class ItemEntityMixin {
     @Inject(method = "tick", at = @At("HEAD"))
     private void onTick(CallbackInfo ci) {
         ItemEntity self = (ItemEntity) (Object) this;
-        if (self.level().isClientSide) return;
+        //if (self.level().isClientSide) return;
 
         // 更新物品堆叠数量显示
         updateStackDisplay(self);

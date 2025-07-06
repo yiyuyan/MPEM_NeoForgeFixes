@@ -28,6 +28,7 @@ import net.shuyanmc.mpem.async.AsyncSystemInitializer;
 import net.shuyanmc.mpem.client.ItemCountRenderer;
 import net.shuyanmc.mpem.config.CoolConfig;
 import net.shuyanmc.mpem.events.ModEventHandlers;
+import net.shuyanmc.mpem.optimization.EntityOptimizer;
 import net.shuyanmc.mpem.particles.AsyncParticleHandler;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
@@ -84,6 +85,7 @@ public class MpemMod {
             modEventBus.addListener(this::clientSetup);
             NeoForge.EVENT_BUS.register(ItemCountRenderer.class);
         }
+        NeoForge.EVENT_BUS.register(EntityOptimizer.class);
         MixinBootstrap.init();
         ModEventHandlers.register(modEventBus, forgeEventBus);
         modEventBus.addListener(AsyncSystemInitializer::init);
