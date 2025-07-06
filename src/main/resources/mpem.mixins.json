@@ -32,5 +32,8 @@
   },
   "overwrites": {
     "requireAnnotations": true
-  }
+  },
+  "mixins": [
+    "EnchantmentMenuMixin"
+  ]
 }

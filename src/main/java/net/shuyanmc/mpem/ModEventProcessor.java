@@ -5,6 +5,8 @@ import net.neoforged.bus.api.Event;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLEnvironment;
+import net.neoforged.neoforge.event.enchanting.EnchantmentLevelSetEvent;
+import net.neoforged.neoforge.event.enchanting.GetEnchantmentLevelEvent;
 import net.neoforged.neoforgespi.language.ModFileScanData;
 import net.shuyanmc.mpem.config.CoolConfig;
 import org.apache.commons.io.FileUtils;
@@ -137,12 +139,23 @@ public class ModEventProcessor {
                 String className = parts[0];
                 String methodName = parts[1];
 
+                try {
+                    Class.forName(className);
+                    System.out.println("TESTED A CLASS: "+className);
+                } catch (ClassNotFoundException | NoClassDefFoundError | ClassCastException e) {
+                    AsyncEventSystem.LOGGER.debug("Skipped a class: {}",className);
+                    continue;
+                }
+
                 if (isClientOnlyClass(className)) {
                     AsyncEventSystem.LOGGER.warn(CLIENT_ONLY_WARNING + className);
                     continue;
                 }
 
                 Class<?> clazz = Class.forName(className);
+                if(clazz.equals(EnchantmentLevelSetEvent.class) || clazz.equals(GetEnchantmentLevelEvent.class)){
+                    AsyncEventSystem.LOGGER.info("Skipped a event what will case bugs: {}",className);
+                }
                 for (Method method : clazz.getDeclaredMethods()) {
                     if (method.getName().equals(methodName)) {
                         Class<?>[] params = method.getParameterTypes();
@@ -157,7 +170,7 @@ public class ModEventProcessor {
                         }
                     }
                 }
-            } catch (NoClassDefFoundError e) {
+            } catch (NoClassDefFoundError | ClassNotFoundException e) {
                 if (e.getMessage().contains("client/renderer")) {
                     AsyncEventSystem.LOGGER.warn(CLIENT_ONLY_WARNING + e.getMessage());
                 } else {

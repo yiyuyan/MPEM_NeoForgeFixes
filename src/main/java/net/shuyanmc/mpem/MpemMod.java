@@ -75,7 +75,7 @@ public class MpemMod {
         IEventBus modEventBus = container.getEventBus();
         IEventBus forgeEventBus = NeoForge.EVENT_BUS;
         container.registerConfig(ModConfig.Type.COMMON, CoolConfig.SPEC, "mpem.toml");
-        NeoForge.EVENT_BUS.register(this);
+        //NeoForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::setup);
         modEventBus.addListener(this::onCommonSetup);
         modEventBus.addListener(this::onRegisterPayloadHandlers);
