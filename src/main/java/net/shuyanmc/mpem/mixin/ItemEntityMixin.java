@@ -107,7 +107,7 @@ public abstract class ItemEntityMixin {
         ItemStack stack = entity.getItem();
         if (stack.getCount() > 1) {
             // 使用深绿色文本显示堆叠数量
-            Component countText = Component.literal("×" + stack.getCount())
+            Component countText = Component.literal("x" + stack.getCount())
                     .withStyle(ChatFormatting.DARK_GREEN)
                     .withStyle(ChatFormatting.BOLD);
 
