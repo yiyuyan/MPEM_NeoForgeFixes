@@ -2,6 +2,7 @@
 package net.shuyanmc.mpem.mixin;
 
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.level.Level;
 import net.shuyanmc.mpem.EntityTickHelper;
 import org.spongepowered.asm.mixin.Mixin;
@@ -20,7 +21,7 @@ public abstract class LevelMixin {
     )
     private void onEntityTick(Consumer<Entity> consumer, Entity entity, CallbackInfo ci) {
         if (EntityTickHelper.shouldCancelTick(entity)) {
-            ci.cancel();
+            if (!(entity instanceof ItemEntity)) ci.cancel();
         }
     }
 }
