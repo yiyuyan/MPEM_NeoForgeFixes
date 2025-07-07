@@ -1,7 +1,12 @@
 package net.shuyanmc.mpem.mixin;
 
 import net.neoforged.bus.ConsumerEventHandler;
+import net.neoforged.bus.api.Event;
+import net.shuyanmc.mpem.MpemMod;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = ConsumerEventHandler.class)
 public class MixinASMEventHandler {
@@ -26,4 +31,15 @@ public class MixinASMEventHandler {
     private Object bypassConstructorCall(Constructor<?> constructor, Object[] args) {
         return DummyHandler.INSTANCE;
     }*/
+
+    @Inject(method = "invoke",at = @At("HEAD"),cancellable = true)
+    public void onInvoke(Event event, CallbackInfo ci){
+        try {
+            Class.forName(event.getClass().getName());
+        }
+        catch (NoClassDefFoundError | ClassNotFoundException e){
+            MpemMod.LOGGER.error("Skipped a event.");
+            ci.cancel();
+        }
+    }
 }

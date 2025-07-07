@@ -93,6 +93,10 @@ public class AsyncEventSystem {
         for (String className : asyncEvents) {
             try {
                 Class<? extends Event> eventClass = loadClass(className);
+                if(eventClass==null){
+                    LOGGER.warn("Can't load the class {}",className);
+                    continue;
+                }
                 if (isClientOnlyEvent(eventClass)) {
                     LOGGER.debug("Skipping client event: {}", className);
                     continue;
@@ -102,6 +106,10 @@ public class AsyncEventSystem {
                 LOGGER.warn("[Fallback] Failed to load async event: {}, falling back to SYNC", className);
                 try {
                     Class<? extends Event> eventClass = loadClass(className);
+                    if(eventClass==null){
+                        LOGGER.warn("Can't load the class {}",className);
+                        continue;
+                    }
                     registerSyncEvent(eventClass);
                 } catch (ClassNotFoundException ex) {
                     LOGGER.error("[Critical] Event class not found: {}", className);
@@ -112,6 +120,10 @@ public class AsyncEventSystem {
         for (String className : syncEvents) {
             try {
                 Class<? extends Event> eventClass = loadClass(className);
+                if(eventClass==null){
+                    LOGGER.warn("Can't load the class {}",className);
+                    continue;
+                }
                 registerSyncEvent(eventClass);
             } catch (ClassNotFoundException e) {
                 LOGGER.error("[Critical] Sync event class not found: {}", className);
@@ -129,10 +141,16 @@ public class AsyncEventSystem {
                 throw new IllegalArgumentException("Class " + className + " does not extend Event");
             }
             return (Class<? extends Event>) clazz;
-        } catch (ClassNotFoundException e) {
-            ClassLoader forgeLoader = Event.class.getClassLoader();
-            Class<?> clazz = Class.forName(className, true, forgeLoader);
-            return (Class<? extends Event>) clazz;
+        } catch (NoClassDefFoundError | ClassNotFoundException e) {
+            //MpemMod.LOGGER.error(e.toString());
+            try {
+                ClassLoader forgeLoader = Event.class.getClassLoader();
+                Class<?> clazz = Class.forName(className, true, forgeLoader);
+                return (Class<? extends Event>) clazz;
+            } catch (NoClassDefFoundError | ClassNotFoundException ex) {
+                //MpemMod.LOGGER.error(e.toString());
+                return null;
+            }
         }
     }
 

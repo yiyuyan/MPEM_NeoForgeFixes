@@ -14,6 +14,7 @@ import org.objectweb.asm.Type;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -53,7 +54,7 @@ public class ModEventProcessor {
                     if (SUBSCRIBE_EVENT.equals(ad.annotationType())) {
                         processAnnotationData(ad, eventMethods);
                     }
-                } catch (Exception | Error e) {
+                } catch (Throwable e) {
                     try {
                         FileUtils.writeStringToFile(MpemMod.MPEM_EVENTS_LOG,"\n"+ e,true);
                         for (StackTraceElement stackTraceElement : e.getStackTrace()) {
@@ -62,7 +63,7 @@ public class ModEventProcessor {
                         for (Throwable stackTraceElement : e.getSuppressed()) {
                             FileUtils.writeStringToFile(MpemMod.MPEM_EVENTS_LOG,"\n"+stackTraceElement.toString(),true);
                         }
-                    } catch (IOException ex) {
+                    } catch (Throwable ex) {
                         e.printStackTrace();
                     }
                 }
@@ -70,10 +71,24 @@ public class ModEventProcessor {
         }
 
         AsyncEventSystem.LOGGER.info("Found {} event methods in mods", eventMethods.size());
+        ArrayList<String> removes = new ArrayList<>();
+        for (String eventMethod : eventMethods) {
+            String className = eventMethod.split("#")[0];
+            try {
+                Class.forName(className);
+            }
+            catch (NoClassDefFoundError | ClassNotFoundException e){
+                MpemMod.LOGGER.error("Error in loading the event method class {}",className);
+                removes.add(eventMethod);
+                MpemMod.LOGGER.info("Remove a event method {}",eventMethod);
+            }
+        }
+        removes.forEach(eventMethods::remove);
         try{
             processEventMethods(eventMethods);
-    } catch (Exception | Error e) {
+    } catch (NoClassDefFoundError | Exception e) {
         try {
+            if(!(e instanceof NoClassDefFoundError)) return;
             FileUtils.writeStringToFile(MpemMod.MPEM_EVENTS_LOG,"\n"+ e,true);
             for (StackTraceElement stackTraceElement : e.getStackTrace()) {
                 FileUtils.writeStringToFile(MpemMod.MPEM_EVENTS_LOG,"\n"+stackTraceElement.toString(),true);
@@ -81,7 +96,7 @@ public class ModEventProcessor {
             for (Throwable stackTraceElement : e.getSuppressed()) {
                 FileUtils.writeStringToFile(MpemMod.MPEM_EVENTS_LOG,"\n"+stackTraceElement.toString(),true);
             }
-        } catch (IOException ex) {
+        } catch (Throwable ex) {
             e.printStackTrace();
         }
     }
@@ -111,9 +126,9 @@ public class ModEventProcessor {
         try {
             className = ad.clazz().getClassName();
             Class.forName(className);
-            System.out.println("TESTED A CLASS: "+className);
-        } catch (ClassNotFoundException | ClassCastException | Error e) {
-            AsyncEventSystem.LOGGER.debug("Skipped a class.");
+            //System.out.println("TESTED A CLASS: "+className);
+        } catch (NoClassDefFoundError | ClassNotFoundException e) {
+            AsyncEventSystem.LOGGER.info("Skipped a class.");
             return;
         }
 
@@ -136,7 +151,7 @@ public class ModEventProcessor {
         if (CoolConfig.isStrictClassCheckingEnabled()) {
             try {
                 Class.forName(className, false, ModEventProcessor.class.getClassLoader());
-            } catch (ClassNotFoundException | NoClassDefFoundError e) {
+            } catch (Throwable e) {
                 AsyncEventSystem.LOGGER.debug("Class loading failed: {}", className);
                 PROCESSED_CLASSES.add(className);
                 return;
@@ -156,15 +171,19 @@ public class ModEventProcessor {
 
                 try {
                     Class.forName(className);
-                    System.out.println("TESTED A CLASS: "+className);
-                } catch (ClassNotFoundException | ClassCastException | Error e) {
-                    AsyncEventSystem.LOGGER.debug("Skipped a class: {}",className);
-                    FileUtils.writeStringToFile(MpemMod.MPEM_EVENTS_LOG,"\n"+ e,true);
-                    for (StackTraceElement stackTraceElement : e.getStackTrace()) {
-                        FileUtils.writeStringToFile(MpemMod.MPEM_EVENTS_LOG,"\n"+stackTraceElement.toString(),true);
-                    }
-                    for (Throwable stackTraceElement : e.getSuppressed()) {
-                        FileUtils.writeStringToFile(MpemMod.MPEM_EVENTS_LOG,"\n"+stackTraceElement.toString(),true);
+                    //System.out.println("TESTED A CLASS: "+className);
+                } catch (NoClassDefFoundError | ClassNotFoundException e) {
+                    try {
+                        AsyncEventSystem.LOGGER.debug("Skipped a class: {}",className);
+                        FileUtils.writeStringToFile(MpemMod.MPEM_EVENTS_LOG,"\n"+ e,true);
+                        for (StackTraceElement stackTraceElement : e.getStackTrace()) {
+                            FileUtils.writeStringToFile(MpemMod.MPEM_EVENTS_LOG,"\n"+stackTraceElement.toString(),true);
+                        }
+                        for (Throwable stackTraceElement : e.getSuppressed()) {
+                            FileUtils.writeStringToFile(MpemMod.MPEM_EVENTS_LOG,"\n"+stackTraceElement.toString(),true);
+                        }
+                    } catch (Throwable ex) {
+                        ex.printStackTrace();
                     }
                     continue;
                 }
@@ -192,7 +211,7 @@ public class ModEventProcessor {
                         }
                     }
                 }
-            } catch (ClassNotFoundException | Error e) {
+            } catch (NoClassDefFoundError | ClassNotFoundException e) {
                 if (e.getMessage().contains("client/renderer")) {
                     AsyncEventSystem.LOGGER.warn(CLIENT_ONLY_WARNING + e.getMessage());
                 } else {
