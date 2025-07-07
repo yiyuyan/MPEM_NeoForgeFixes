@@ -14,14 +14,14 @@ public class CoolConfig {
     public static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
     public static final ModConfigSpec SPEC;
 
-    // ==================== ÂÆû‰Ωì‰ºòÂåñ | Entity Optimization ====================
+    // ====================  µÃÂ”≈ªØ | Entity Optimization ====================
     public static ModConfigSpec.BooleanValue disableEntityCollisions;
     public static ModConfigSpec.BooleanValue optimizeEntityAI;
     public static ModConfigSpec.IntValue entityActivationRange;
     public static final ModConfigSpec.BooleanValue OPTIMIZE_ENTITY_CLEANUP;
     public static final ModConfigSpec.BooleanValue reduceEntityUpdates;
 
-    // Êñ∞Â¢ûÂÆû‰Ωì‰ºòÂåñÈÖçÁΩÆ
+    // –¬‘ˆ µÃÂ”≈ªØ≈‰÷√
     public static ModConfigSpec.BooleanValue optimizeEntities;
     public static ModConfigSpec.BooleanValue ignoreDeadEntities;
     public static ModConfigSpec.BooleanValue optimizeItems;
@@ -30,7 +30,7 @@ public class CoolConfig {
     public static ModConfigSpec.IntValue verticalRange;
     public static ModConfigSpec.BooleanValue tickRaidersInRaid;
 
-    // ==================== Áâ©ÂìÅ‰ºòÂåñ | Item Optimization ====================
+    // ==================== ŒÔ∆∑”≈ªØ | Item Optimization ====================
     public static ModConfigSpec.IntValue maxStackSize;
     public static ModConfigSpec.DoubleValue mergeDistance;
     public static ModConfigSpec.IntValue listMode;
@@ -39,22 +39,22 @@ public class CoolConfig {
     public static final ModConfigSpec.BooleanValue ENABLED;
     public static final ModConfigSpec.IntValue MAX_STACK_SIZE;
 
-    // ==================== ÂÜÖÂ≠ò‰ºòÂåñ | Memory Optimization ====================
+    // ==================== ƒ⁄¥Ê”≈ªØ | Memory Optimization ====================
     public static final ModConfigSpec.IntValue MEMORY_CLEAN_INTERVAL;
     public static final ModConfigSpec.BooleanValue ENABLE_GC;
 
-    // ==================== Ë∞ÉËØïÈÄâÈ°π | Debug Options ====================
+    // ==================== µ˜ ‘—°œÓ | Debug Options ====================
     public static final ModConfigSpec.BooleanValue DEBUG_LOGGING;
     public static final ModConfigSpec.BooleanValue LOG_BLOCK_EVENTS;
 
-    // ==================== Âå∫Âùó‰ºòÂåñ | Chunk Optimization ====================
+    // ==================== «¯øÈ”≈ªØ | Chunk Optimization ====================
     public static ModConfigSpec.BooleanValue aggressiveChunkUnloading;
     public static ModConfigSpec.IntValue chunkUnloadDelay;
     public static final ModConfigSpec.BooleanValue reduceChunkUpdates;
     public static final ModConfigSpec.BooleanValue filterRedundantBlockUpdates;
     public static final ModConfigSpec.IntValue CHUNK_GEN_THREADS;
 
-    // ==================== ÂºÇÊ≠•‰ºòÂåñ | Async Optimization ====================
+    // ==================== “Ï≤Ω”≈ªØ | Async Optimization ====================
     public static final ModConfigSpec.BooleanValue ASYNC_PARTICLES;
     public static final ModConfigSpec.IntValue ASYNC_PARTICLES_THREADS;
     public static final ModConfigSpec.IntValue AI_THREADS;
@@ -65,254 +65,254 @@ public class CoolConfig {
     public static ModConfigSpec.IntValue maxCPUPro;
     public static ModConfigSpec.IntValue maxthreads;
 
-    // ==================== ‰∫ã‰ª∂Á≥ªÁªü | Event System ====================
+    // ====================  ¬º˛œµÕ≥ | Event System ====================
     public static final ModConfigSpec.BooleanValue ENABLE_EVENT_OPTIMIZATION;
     public static final ModConfigSpec.ConfigValue<List<? extends String>> ASYNC_EVENT_CLASS_BLACKLIST;
     public static final ModConfigSpec.ConfigValue<List<? extends String>> ASYNC_EVENT_MOD_BLACKLIST;
     public static final ModConfigSpec.BooleanValue STRICT_CLASS_CHECKING;
 
-    // ==================== Âèç‰ΩúÂºäÁ≥ªÁªü | Anti-Cheat System ====================
+    // ==================== ∑¥◊˜±◊œµÕ≥ | Anti-Cheat System ====================
     public static final ModConfigSpec.BooleanValue ANTI_CHEAT_ENABLED;
     public static final ModConfigSpec.IntValue DETECTION_DELAY;
     public static final ModConfigSpec.ConfigValue<List<? extends String>> CLIENT_CLASS_WHITELIST;
     public static final ModConfigSpec.ConfigValue<List<? extends String>> MOD_WHITELIST;
     public static final ModConfigSpec.BooleanValue CLASS_NAME_DETECTION_ENABLED;
 
-    // ==================== Â∏ßÁéáÊéßÂà∂ | Frame Rate Control ====================
+    // ==================== ÷°¬ øÿ÷∆ | Frame Rate Control ====================
     public static final ModConfigSpec.BooleanValue REDUCE_FPS_WHEN_INACTIVE;
     public static final ModConfigSpec.IntValue INACTIVE_FPS_LIMIT;
 
-    // ==================== Ê∏≤ÊüìË∑ùÁ¶ª | Render Distance ====================
+    // ==================== ‰÷»ææ‡¿Î | Render Distance ====================
     public static final ModConfigSpec.BooleanValue REDUCE_RENDER_DISTANCE_WHEN_INACTIVE;
     public static final ModConfigSpec.IntValue INACTIVE_RENDER_DISTANCE;
 
 
 
     static {
-        // ==================== ÂÆû‰Ωì‰ºòÂåñËÆæÁΩÆ | Entity Optimization Settings ====================
-        BUILDER.comment("ÂÆû‰Ωì‰ºòÂåñËÆæÁΩÆ | Entity Optimization Settings").push("entity_optimization");
+        // ====================  µÃÂ”≈ªØ…Ë÷√ | Entity Optimization Settings ====================
+        BUILDER.comment(" µÃÂ”≈ªØ…Ë÷√ | Entity Optimization Settings").push("entity_optimization");
 
         disableEntityCollisions = BUILDER
-                .comment("‰ºòÂåñÂÆû‰ΩìÁ¢∞ÊíûÊ£ÄÊµã | Optimize entity collision detection")
+                .comment("”≈ªØ µÃÂ≈ˆ◊≤ºÏ≤‚ | Optimize entity collision detection")
                 .define("disableEntityCollisions", true);
 
         optimizeEntityAI = BUILDER
-                .comment("‰ºòÂåñÂÆû‰ΩìAIËÆ°ÁÆó | Optimize entity AI calculations")
+                .comment("”≈ªØ µÃÂAIº∆À„ | Optimize entity AI calculations")
                 .define("optimizeEntityAI", true);
 
         entityActivationRange = BUILDER
-                .comment("ÂÆû‰ΩìÊøÄÊ¥ªËåÉÂõ¥ (ÊñπÂùó) | Entity activation range (blocks)")
+                .comment(" µÃÂº§ªÓ∑∂Œß (∑ΩøÈ) | Entity activation range (blocks)")
                 .defineInRange("entityActivationRange", 32, 16, 128);
 
         OPTIMIZE_ENTITY_CLEANUP = BUILDER
-                .comment("ÂêØÁî®Ê≠ª‰∫°ÂÆû‰ΩìÊ∏ÖÁêÜ | Enable dead entity cleanup")
+                .comment("∆Ù”√À¿Õˆ µÃÂ«Â¿Ì | Enable dead entity cleanup")
                 .define("entityCleanup", true);
 
         reduceEntityUpdates = BUILDER
-                .comment("ÂáèÂ∞ëËøúÂ§ÑÂÆû‰ΩìÁöÑÂêåÊ≠•È¢ëÁéá | Reduce entity sync frequency for distant entities")
+                .comment("ºı…Ÿ‘∂¥¶ µÃÂµƒÕ¨≤Ω∆µ¬  | Reduce entity sync frequency for distant entities")
                 .define("reduceEntityUpdates", true);
 
-        // Êñ∞Â¢ûÂÆû‰Ωì‰ºòÂåñÈÖçÁΩÆ
+        // –¬‘ˆ µÃÂ”≈ªØ≈‰÷√
         optimizeEntities = BUILDER
-                .comment("ÊòØÂê¶‰ºòÂåñÂÆû‰Ωìtick | Optimize entity ticking")
+                .comment(" «∑Ò”≈ªØ µÃÂtick | Optimize entity ticking")
                 .define("optimizeEntities", true);
 
         ignoreDeadEntities = BUILDER
-                .comment("ÊòØÂê¶ÂøΩÁï•Â∑≤Ê≠ª‰∫°ÁöÑÂÆû‰Ωì | Ignore dead entities")
+                .comment(" «∑Ò∫ˆ¬‘“—À¿Õˆµƒ µÃÂ | Ignore dead entities")
                 .define("ignoreDeadEntities", false);
 
         optimizeItems = BUILDER
-                .comment("ÊòØÂê¶‰ºòÂåñÁâ©ÂìÅÂÆû‰Ωì | Optimize item entities")
+                .comment(" «∑Ò”≈ªØŒÔ∆∑ µÃÂ | Optimize item entities")
                 .define("optimizeItems", true);
 
         itemWhitelist = BUILDER
-                .comment("Áâ©ÂìÅÁôΩÂêçÂçïÔºà‰∏ç‰ºöË¢´‰ºòÂåñÁöÑÁâ©ÂìÅÔºâ| Item whitelist (items that will not be optimized)")
+                .comment("ŒÔ∆∑∞◊√˚µ•£®≤ªª·±ª”≈ªØµƒŒÔ∆∑£©| Item whitelist (items that will not be optimized)")
                 .defineList("itemWhitelist", Collections.singletonList("minecraft:nether_star"),
                         o -> o instanceof String);
 
         horizontalRange = BUILDER
-                .comment("ÂÆû‰ΩìÊøÄÊ¥ªËåÉÂõ¥ÔºàÊ∞¥Âπ≥ÊñπÂêëÔºâ| Horizontal activation range for entities (blocks)")
+                .comment(" µÃÂº§ªÓ∑∂Œß£®ÀÆ∆Ω∑ΩœÚ£©| Horizontal activation range for entities (blocks)")
                 .defineInRange("horizontalRange", 32, 8, 128);
 
         verticalRange = BUILDER
-                .comment("ÂÆû‰ΩìÊøÄÊ¥ªËåÉÂõ¥ÔºàÂûÇÁõ¥ÊñπÂêëÔºâ| Vertical activation range for entities (blocks)")
+                .comment(" µÃÂº§ªÓ∑∂Œß£®¥π÷±∑ΩœÚ£©| Vertical activation range for entities (blocks)")
                 .defineInRange("verticalRange", 16, 8, 64);
 
         tickRaidersInRaid = BUILDER
-                .comment("Âú®Ë¢≠Âáª‰∏≠ÊòØÂê¶Âº∫Âà∂tickË¢≠ÂáªËÄÖ | Force tick raiders during raids")
+                .comment("‘⁄œÆª˜÷– «∑Ò«ø÷∆tickœÆª˜’ﬂ | Force tick raiders during raids")
                 .define("tickRaidersInRaid", true);
 
         BUILDER.pop();
 
-        // ==================== Â∏ßÁéáÊéßÂà∂ËÆæÁΩÆ | Frame Rate Control Settings ====================
-        BUILDER.comment("Â∏ßÁéáÊéßÂà∂ËÆæÁΩÆ | Frame Rate Control Settings").push("frame_rate");
+        // ==================== ÷°¬ øÿ÷∆…Ë÷√ | Frame Rate Control Settings ====================
+        BUILDER.comment("÷°¬ øÿ÷∆…Ë÷√ | Frame Rate Control Settings").push("frame_rate");
 
         REDUCE_FPS_WHEN_INACTIVE = BUILDER
-                .comment("ÊòØÂê¶Âú®Á™óÂè£ÈùûÊ¥ªÂä®Êó∂Èôç‰ΩéFPS | Reduce FPS when window is inactive")
+                .comment(" «∑Ò‘⁄¥∞ø⁄∑«ªÓ∂Ø ±ΩµµÕFPS | Reduce FPS when window is inactive")
                 .define("reduceFpsWhenInactive", true);
 
         INACTIVE_FPS_LIMIT = BUILDER
-                .comment("ÈùûÊ¥ªÂä®Áä∂ÊÄÅÊó∂ÁöÑFPSÈôêÂà∂ | FPS limit when inactive")
+                .comment("∑«ªÓ∂Ø◊¥Ã¨ ±µƒFPSœﬁ÷∆ | FPS limit when inactive")
                 .defineInRange("inactiveFpsLimit", 30, 5, 120);
 
         BUILDER.pop();
 
-        // ==================== Ê∏≤ÊüìË∑ùÁ¶ªËÆæÁΩÆ | Render Distance Settings ====================
-        BUILDER.comment("Ê∏≤ÊüìË∑ùÁ¶ªËÆæÁΩÆ | Render Distance Settings").push("render_distance");
+        // ==================== ‰÷»ææ‡¿Î…Ë÷√ | Render Distance Settings ====================
+        BUILDER.comment("‰÷»ææ‡¿Î…Ë÷√ | Render Distance Settings").push("render_distance");
 
         REDUCE_RENDER_DISTANCE_WHEN_INACTIVE = BUILDER
-                .comment("ÊòØÂê¶Âú®Á™óÂè£ÈùûÊ¥ªÂä®Êó∂Èôç‰ΩéÊ∏≤ÊüìË∑ùÁ¶ª | Reduce render distance when window is inactive")
+                .comment(" «∑Ò‘⁄¥∞ø⁄∑«ªÓ∂Ø ±ΩµµÕ‰÷»ææ‡¿Î | Reduce render distance when window is inactive")
                 .define("reduceRenderDistanceWhenInactive", true);
 
         INACTIVE_RENDER_DISTANCE = BUILDER
-                .comment("ÈùûÊ¥ªÂä®Áä∂ÊÄÅÊó∂ÁöÑÊ∏≤ÊüìË∑ùÁ¶ª | Render distance when inactive")
+                .comment("∑«ªÓ∂Ø◊¥Ã¨ ±µƒ‰÷»ææ‡¿Î | Render distance when inactive")
                 .defineInRange("inactiveRenderDistance", 4, 2, 32);
 
         BUILDER.pop();
 
 
 
-        // ==================== Áâ©ÂìÅ‰ºòÂåñËÆæÁΩÆ | Item Optimization Settings ====================
-        BUILDER.comment("Áâ©ÂìÅ‰ºòÂåñËÆæÁΩÆ | Item Optimization Settings").push("item_optimization");
+        // ==================== ŒÔ∆∑”≈ªØ…Ë÷√ | Item Optimization Settings ====================
+        BUILDER.comment("ŒÔ∆∑”≈ªØ…Ë÷√ | Item Optimization Settings").push("item_optimization");
 
         maxStackSize = BUILDER
-                .comment("ÂêàÂπ∂Áâ©ÂìÅÁöÑÊúÄÂ§ßÂ†ÜÂè†Êï∞ÈáèÔºà0Ë°®Á§∫Êó†ÈôêÂà∂Ôºâ| Maximum stack size for merged items (0 = no limit)")
+                .comment("∫œ≤¢ŒÔ∆∑µƒ◊Ó¥Û∂—µ˛ ˝¡ø£®0±Ì æŒﬁœﬁ÷∆£©| Maximum stack size for merged items (0 = no limit)")
                 .defineInRange("maxStackSize", 0, 0, Integer.MAX_VALUE);
 
         mergeDistance = BUILDER
-                .comment("Áâ©ÂìÅÂêàÂπ∂Ê£ÄÊµãÂçäÂæÑÔºàÂçï‰ΩçÔºöÊñπÂùóÔºâ| Item merge detection radius in blocks")
+                .comment("ŒÔ∆∑∫œ≤¢ºÏ≤‚∞Îæ∂£®µ•Œª£∫∑ΩøÈ£©| Item merge detection radius in blocks")
                 .defineInRange("mergeDistance", 0.5, 0.1, 10.0);
 
         listMode = BUILDER
-                .comment("0: Á¶ÅÁî® 1: ÁôΩÂêçÂçïÊ®°Âºè 2: ÈªëÂêçÂçïÊ®°Âºè | 0: Disabled, 1: Whitelist, 2: Blacklist")
+                .comment("0: Ω˚”√ 1: ∞◊√˚µ•ƒ£ Ω 2: ∫⁄√˚µ•ƒ£ Ω | 0: Disabled, 1: Whitelist, 2: Blacklist")
                 .defineInRange("listMode", 0, 0, 2);
 
         itemList = BUILDER
-                .comment("ÁôΩÂêçÂçï/ÈªëÂêçÂçï‰∏≠ÁöÑÁâ©ÂìÅÊ≥®ÂÜåÂêçÂàóË°® | Item registry names for whitelist/blacklist")
+                .comment("∞◊√˚µ•/∫⁄√˚µ•÷–µƒŒÔ∆∑◊¢≤·√˚¡–±Ì | Item registry names for whitelist/blacklist")
                 .defineList("itemList", Collections.emptyList(), o -> o instanceof String);
 
         showStackCount = BUILDER
-                .comment("ÊòØÂê¶Âú®ÂêàÂπ∂ÂêéÁöÑÁâ©ÂìÅ‰∏äÊòæÁ§∫Â†ÜÂè†Êï∞Èáè | Whether to show stack count on merged items")
+                .comment(" «∑Ò‘⁄∫œ≤¢∫ÛµƒŒÔ∆∑…œœ‘ æ∂—µ˛ ˝¡ø | Whether to show stack count on merged items")
                 .define("showStackCount", true);
 
         BUILDER.push("stack_size");
 
         ENABLED = BUILDER
-                .comment("ÂêØÁî®Ëá™ÂÆö‰πâÂ†ÜÂè†Â§ßÂ∞è | Enable custom stack sizes")
+                .comment("∆Ù”√◊‘∂®“Â∂—µ˛¥Û–° | Enable custom stack sizes")
                 .define("enabled", true);
 
         MAX_STACK_SIZE = BUILDER
-                .comment("ÊúÄÂ§ßÁâ©ÂìÅÂ†ÜÂè†Â§ßÂ∞è (1-9999) | Maximum item stack size (1-9999)")
+                .comment("◊Ó¥ÛŒÔ∆∑∂—µ˛¥Û–° (1-9999) | Maximum item stack size (1-9999)")
                 .defineInRange("maxStackSize", 64, 1, 9999);
 
         BUILDER.pop();
         BUILDER.pop();
 
-        // ==================== ÂÜÖÂ≠ò‰ºòÂåñËÆæÁΩÆ | Memory Optimization Settings ====================
-        BUILDER.comment("ÂÜÖÂ≠ò‰ºòÂåñËÆæÁΩÆ | Memory Optimization Settings").push("memory_optimization");
+        // ==================== ƒ⁄¥Ê”≈ªØ…Ë÷√ | Memory Optimization Settings ====================
+        BUILDER.comment("ƒ⁄¥Ê”≈ªØ…Ë÷√ | Memory Optimization Settings").push("memory_optimization");
 
         MEMORY_CLEAN_INTERVAL = BUILDER
-                .comment("ÂÜÖÂ≠òÊ∏ÖÁêÜÈó¥Èöî(Áßí) | Memory cleanup interval (seconds)")
+                .comment("ƒ⁄¥Ê«Â¿Ìº‰∏Ù(√Î) | Memory cleanup interval (seconds)")
                 .defineInRange("cleanInterval", 300, 60, 3600);
 
         ENABLE_GC = BUILDER
-                .comment("ÊòØÂê¶Âú®Ê∏ÖÁêÜÊó∂Ëß¶ÂèëÂûÉÂúæÂõûÊî∂ | Whether to trigger garbage collection during cleanup")
+                .comment(" «∑Ò‘⁄«Â¿Ì ±¥•∑¢¿¨ª¯ªÿ ’ | Whether to trigger garbage collection during cleanup")
                 .define("enableGC", true);
 
         BUILDER.pop();
 
-        // ==================== Ë∞ÉËØïËÆæÁΩÆ | Debug Settings ====================
-        BUILDER.comment("Ë∞ÉËØïËÆæÁΩÆ | Debug Settings").push("debug");
+        // ==================== µ˜ ‘…Ë÷√ | Debug Settings ====================
+        BUILDER.comment("µ˜ ‘…Ë÷√ | Debug Settings").push("debug");
 
         DEBUG_LOGGING = BUILDER
-                .comment("ÂêØÁî®Ë∞ÉËØïÊó•Âøó | Enable debug logging")
+                .comment("∆Ù”√µ˜ ‘»’÷æ | Enable debug logging")
                 .define("debug", false);
 
         LOG_BLOCK_EVENTS = BUILDER
-                .comment("ËÆ∞ÂΩïÊñπÂùóÁõ∏ÂÖ≥‰∫ã‰ª∂ | Log block related events")
+                .comment("º«¬º∑ΩøÈœ‡πÿ ¬º˛ | Log block related events")
                 .define("logBlockEvents", false);
 
         BUILDER.pop();
 
-        // ==================== Âå∫Âùó‰ºòÂåñËÆæÁΩÆ | Chunk Optimization Settings ====================
-        BUILDER.comment("Âå∫Âùó‰ºòÂåñËÆæÁΩÆ | Chunk Optimization Settings").push("chunk_optimization");
+        // ==================== «¯øÈ”≈ªØ…Ë÷√ | Chunk Optimization Settings ====================
+        BUILDER.comment("«¯øÈ”≈ªØ…Ë÷√ | Chunk Optimization Settings").push("chunk_optimization");
 
         aggressiveChunkUnloading = BUILDER
-                .comment("‰∏ªÂä®Âç∏ËΩΩÈùûÊ¥ªÂä®Âå∫Âùó | Aggressively unload inactive chunks")
+                .comment("÷˜∂Ø–∂‘ÿ∑«ªÓ∂Ø«¯øÈ | Aggressively unload inactive chunks")
                 .define("aggressiveChunkUnloading", true);
 
         chunkUnloadDelay = BUILDER
-                .comment("Âå∫ÂùóÂç∏ËΩΩÂª∂Ëøü (Áßí) | Chunk unload delay (seconds)")
+                .comment("«¯øÈ–∂‘ÿ—”≥Ÿ (√Î) | Chunk unload delay (seconds)")
                 .defineInRange("chunkUnloadDelay", 60, 10, 600);
 
         reduceChunkUpdates = BUILDER
-                .comment("ÂΩìÁé©ÂÆ∂ÁßªÂä®Áü≠Ë∑ùÁ¶ªÊó∂ÂáèÂ∞ëÂå∫ÂùóÊõ¥Êñ∞È¢ëÁéá | Reduce chunk update frequency when player moves short distances")
+                .comment("µ±ÕÊº““∆∂Ø∂Ãæ‡¿Î ±ºı…Ÿ«¯øÈ∏¸–¬∆µ¬  | Reduce chunk update frequency when player moves short distances")
                 .define("reduceChunkUpdates", true);
 
         filterRedundantBlockUpdates = BUILDER
-                .comment("ËøáÊª§ÂÜó‰ΩôÁöÑÊñπÂùóÊõ¥Êñ∞Êï∞ÊçÆÂåÖ | Filter redundant block update packets")
+                .comment("π˝¬À»ﬂ”‡µƒ∑ΩøÈ∏¸–¬ ˝æ›∞¸ | Filter redundant block update packets")
                 .define("filterRedundantBlockUpdates", true);
 
         CHUNK_GEN_THREADS = BUILDER
-                .comment("ÂºÇÊ≠•Âå∫ÂùóÁîüÊàêÁöÑÁ∫øÁ®ãÊï∞ | Number of threads for async chunk generation")
+                .comment("“Ï≤Ω«¯øÈ…˙≥…µƒœﬂ≥Ã ˝ | Number of threads for async chunk generation")
                 .defineInRange("chunkGenThreads", 2, 1, 8);
 
         BUILDER.pop();
 
-        // ==================== ÂºÇÊ≠•‰ºòÂåñËÆæÁΩÆ | Async Optimization Settings ====================
-        BUILDER.comment("ÂºÇÊ≠•‰ºòÂåñËÆæÁΩÆ | Async Optimization Settings").push("async_optimization");
+        // ==================== “Ï≤Ω”≈ªØ…Ë÷√ | Async Optimization Settings ====================
+        BUILDER.comment("“Ï≤Ω”≈ªØ…Ë÷√ | Async Optimization Settings").push("async_optimization");
 
         ASYNC_PARTICLES = BUILDER
-                .comment("ÂêØÁî®ÂºÇÊ≠•Á≤íÂ≠êÂ§ÑÁêÜ | Enable asynchronous particle processing")
+                .comment("∆Ù”√“Ï≤Ω¡£◊”¥¶¿Ì | Enable asynchronous particle processing")
                 .define("asyncParticles", true);
 
         ASYNC_PARTICLES_THREADS = BUILDER
-                .comment("Áî®‰∫éÂºÇÊ≠•Á≤íÂ≠êÁöÑÁ∫øÁ®ãÊï∞ (Êé®Ëçê1-4) | Number of threads to use for async particles (1-4 recommended)")
+                .comment("”√”⁄“Ï≤Ω¡£◊”µƒœﬂ≥Ã ˝ (Õ∆ºˆ1-4) | Number of threads to use for async particles (1-4 recommended)")
                 .defineInRange("asyncParticlesThreads", 2, 1, Runtime.getRuntime().availableProcessors());
 
         AI_THREADS = BUILDER
-                .comment("AIÂ§ÑÁêÜÁöÑÁ∫øÁ®ãÊï∞ | Number of threads for AI processing")
+                .comment("AI¥¶¿Ìµƒœﬂ≥Ã ˝ | Number of threads for AI processing")
                 .defineInRange("aiThreads", 2, 1, 8);
 
         MAX_ASYNC_OPERATIONS_PER_TICK = BUILDER
-                .comment("ÊØètickÂ§ÑÁêÜÁöÑÊúÄÂ§ßÂºÇÊ≠•Êìç‰ΩúÊï∞ | Max async operations processed per tick")
+                .comment("√øtick¥¶¿Ìµƒ◊Ó¥Û“Ï≤Ω≤Ÿ◊˜ ˝ | Max async operations processed per tick")
                 .defineInRange("maxAsyncOpsPerTick", 1000, 100, 10000);
 
         DISABLE_ASYNC_ON_ERROR = BUILDER
-                .comment("Âá∫ÈîôÂêéÁ¶ÅÁî®ËØ•‰∫ã‰ª∂Á±ªÂûãÁöÑÂºÇÊ≠•Â§ÑÁêÜ | Disable async for event type after errors")
+                .comment("≥ˆ¥Ì∫ÛΩ˚”√∏√ ¬º˛¿‡–Õµƒ“Ï≤Ω¥¶¿Ì | Disable async for event type after errors")
                 .define("disableAsyncOnError", true);
 
         ASYNC_EVENT_TIMEOUT = BUILDER
-                .comment("ÂºÇÊ≠•‰∫ã‰ª∂Ë∂ÖÊó∂Êó∂Èó¥(Áßí) | Timeout in seconds for async events")
+                .comment("“Ï≤Ω ¬º˛≥¨ ± ±º‰(√Î) | Timeout in seconds for async events")
                 .defineInRange("asyncEventTimeout", 2, 1, 10);
 
         WAIT_FOR_ASYNC_EVENTS = BUILDER
-                .comment("Á≠âÂæÖÂºÇÊ≠•‰∫ã‰ª∂ÂÆåÊàê | Wait for async events to complete")
+                .comment("µ»¥˝“Ï≤Ω ¬º˛ÕÍ≥… | Wait for async events to complete")
                 .define("waitForAsyncEvents", false);
 
         BUILDER.push("async_cpu_config");
 
         maxCPUPro = BUILDER
-                .comment("ÂºÇÊ≠•Á≥ªÁªüÊúÄÂ§ßCPUÊ†∏ÂøÉÊï∞ | Max CPU Cores for async system (only for async threads, not world async)")
+                .comment("“Ï≤ΩœµÕ≥◊Ó¥ÛCPU∫À–ƒ ˝ | Max CPU Cores for async system (only for async threads, not world async)")
                 .defineInRange("maxCPUPro", 2, 2, 9999);
 
         maxthreads = BUILDER
-                .comment("ÊúÄÂ§ßÁ∫øÁ®ãÊï∞ | Max Threads (only for general async threads, not dedicated async threads)")
+                .comment("◊Ó¥Ûœﬂ≥Ã ˝ | Max Threads (only for general async threads, not dedicated async threads)")
                 .defineInRange("maxthreads", 2, 2, 9999);
 
         BUILDER.pop();
         BUILDER.pop();
 
-        // ==================== ‰∫ã‰ª∂Á≥ªÁªüËÆæÁΩÆ | Event System Settings ====================
-        BUILDER.comment("‰∫ã‰ª∂Á≥ªÁªüËÆæÁΩÆ | Event System Settings").push("event_system");
+        // ====================  ¬º˛œµÕ≥…Ë÷√ | Event System Settings ====================
+        BUILDER.comment(" ¬º˛œµÕ≥…Ë÷√ | Event System Settings").push("event_system");
 
         ENABLE_EVENT_OPTIMIZATION = BUILDER
-                .comment("ÂêØÁî®È´òÊÄßËÉΩ‰∫ã‰ª∂Á≥ªÁªü‰ºòÂåñ | Enable High-Performance event system optimization")
+                .comment("∆Ù”√∏ﬂ–‘ƒ‹ ¬º˛œµÕ≥”≈ªØ | Enable High-Performance event system optimization")
                 .define("enableOptimization", true);
 
         ASYNC_EVENT_CLASS_BLACKLIST = BUILDER
-                .comment("‰∏çÂ∫îÂºÇÊ≠•Â§ÑÁêÜÁöÑ‰∫ã‰ª∂Á±ªÂàóË°® | List of event classes that should NOT be processed asynchronously",
-                        "ÊîØÊåÅÈÄöÈÖçÁ¨¶ (Â¶Ç 'net.minecraftforge.event.entity.living.*') | Supports wildcards (e.g. 'net.minecraftforge.event.entity.living.*')")
+                .comment("≤ª”¶“Ï≤Ω¥¶¿Ìµƒ ¬º˛¿‡¡–±Ì | List of event classes that should NOT be processed asynchronously",
+                        "÷ß≥÷Õ®≈‰∑˚ (»Á 'net.minecraftforge.event.entity.living.*') | Supports wildcards (e.g. 'net.minecraftforge.event.entity.living.*')")
                 .defineList("classBlacklist",
                         List.of(
                                 "net.minecraftforge.event.TickEvent",
@@ -322,33 +322,33 @@ public class CoolConfig {
                         o -> o instanceof String);
 
         ASYNC_EVENT_MOD_BLACKLIST = BUILDER
-                .comment("‰∏çÂ∫îÂºÇÊ≠•Â§ÑÁêÜÁöÑÊ®°ÁªÑIDÂàóË°® | List of mod IDs whose events should NOT be processed asynchronously")
+                .comment("≤ª”¶“Ï≤Ω¥¶¿Ìµƒƒ£◊ÈID¡–±Ì | List of mod IDs whose events should NOT be processed asynchronously")
                 .defineList("modBlacklist", Collections.emptyList(), o -> o instanceof String);
 
         STRICT_CLASS_CHECKING = BUILDER
-                .comment("ÂêØÁî®‰∏•Ê†ºÁöÑÁ±ªÂ≠òÂú®Ê£ÄÊü• (Êé®Ëçê‰∏∫Á®≥ÂÆöÊÄß) | Enable strict class existence checking (recommended for stability)")
+                .comment("∆Ù”√—œ∏Òµƒ¿‡¥Ê‘⁄ºÏ≤È (Õ∆ºˆŒ™Œ»∂®–‘) | Enable strict class existence checking (recommended for stability)")
                 .define("strictClassChecking", true);
 
         BUILDER.pop();
 
-        // ==================== Âèç‰ΩúÂºäÁ≥ªÁªüËÆæÁΩÆ | Anti-Cheat System Settings ====================
-        BUILDER.comment("Âèç‰ΩúÂºäÁ≥ªÁªüËÆæÁΩÆ (‰ªÖÊúçÂä°Âô®ÁîüÊïà) | Anti-Cheat System Settings (Server Only)").push("anti_cheat");
+        // ==================== ∑¥◊˜±◊œµÕ≥…Ë÷√ | Anti-Cheat System Settings ====================
+        BUILDER.comment("∑¥◊˜±◊œµÕ≥…Ë÷√ (Ωˆ∑˛ŒÒ∆˜…˙–ß) | Anti-Cheat System Settings (Server Only)").push("anti_cheat");
 
         ANTI_CHEAT_ENABLED = BUILDER
-                .comment("ÊòØÂê¶ÂêØÁî®Âèç‰ΩúÂºäÁ≥ªÁªü | Whether to enable anti-cheat system")
+                .comment(" «∑Ò∆Ù”√∑¥◊˜±◊œµÕ≥ | Whether to enable anti-cheat system")
                 .define("enabled", true);
 
         DETECTION_DELAY = BUILDER
-                .comment("Ê£ÄÊµãÂª∂ËøüÊó∂Èó¥ÔºàÁßíÔºâ | Detection delay (seconds)",
-                        "Âª∫ËÆÆÂÄº3-5ÁßíÔºåÈÅøÂÖçÁôªÂΩïÊó∂ÂÜ≤Á™Å | Recommended 3-5 seconds to avoid login conflicts")
+                .comment("ºÏ≤‚—”≥Ÿ ±º‰£®√Î£© | Detection delay (seconds)",
+                        "Ω®“È÷µ3-5√Î£¨±‹√‚µ«¬º ±≥ÂÕª | Recommended 3-5 seconds to avoid login conflicts")
                 .defineInRange("detectionDelay", 3, 1, 10);
 
         CLASS_NAME_DETECTION_ENABLED = BUILDER
-                .comment("ÊòØÂê¶ÂêØÁî®Á±ªÂêçÂÆâÂÖ®Ê£ÄÊµã | Whether to enable class name security detection")
+                .comment(" «∑Ò∆Ù”√¿‡√˚∞≤»´ºÏ≤‚ | Whether to enable class name security detection")
                 .define("classNameDetectionEnabled", false);
 
         CLIENT_CLASS_WHITELIST = BUILDER
-                .comment("ÂÆ¢Êà∑Á´ØÁ±ªÂêçÁôΩÂêçÂçï (ÊîØÊåÅÈÄöÈÖçÁ¨¶) | Client class name whitelist (supports wildcards)")
+                .comment("øÕªß∂À¿‡√˚∞◊√˚µ• (÷ß≥÷Õ®≈‰∑˚) | Client class name whitelist (supports wildcards)")
                 .defineList("clientClassWhitelist",
                         List.of(
                                 "com.example.safemod.*",
@@ -357,7 +357,7 @@ public class CoolConfig {
                         o -> o instanceof String);
 
         MOD_WHITELIST = BUILDER
-                .comment("Ë±ÅÂÖçÊ®°ÁªÑIDÂàóË°® | Exempt mod ID list")
+                .comment("ªÌ√‚ƒ£◊ÈID¡–±Ì | Exempt mod ID list")
                 .defineList("modWhitelist", Collections.emptyList(), o -> o instanceof String);
 
         BUILDER.pop();
@@ -365,7 +365,7 @@ public class CoolConfig {
         SPEC = BUILDER.build();
     }
 
-    // ==================== Â∑•ÂÖ∑ÊñπÊ≥ï | Utility Methods ====================
+    // ==================== π§æﬂ∑Ω∑® | Utility Methods ====================
     public static Set<String> getAsyncEventClassBlacklist() {
         return new HashSet<>(ASYNC_EVENT_CLASS_BLACKLIST.get());
     }
