@@ -68,6 +68,7 @@ public class MpemMod {
     public MpemMod(ModContainer container) {
 
         try {
+            new File("log").mkdirs();
             FileUtils.writeStringToFile(MPEM_EVENTS_LOG,"");
         } catch (IOException e) {
             e.printStackTrace();

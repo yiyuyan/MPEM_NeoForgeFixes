@@ -22,7 +22,6 @@
     "ItemStackMixin",
     "mcmixinx",
     "MixinASMEventHandler",
-    "MixinBlockUpdatePacket",
     "MixinBoat",
     "MixinEventBus",
     "uimixin",

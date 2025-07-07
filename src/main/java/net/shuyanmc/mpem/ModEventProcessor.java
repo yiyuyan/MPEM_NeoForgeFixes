@@ -70,7 +70,22 @@ public class ModEventProcessor {
         }
 
         AsyncEventSystem.LOGGER.info("Found {} event methods in mods", eventMethods.size());
-        processEventMethods(eventMethods);
+        try{
+            processEventMethods(eventMethods);
+    } catch (Exception | Error e) {
+        try {
+            FileUtils.writeStringToFile(MpemMod.MPEM_EVENTS_LOG,"\n"+ e,true);
+            for (StackTraceElement stackTraceElement : e.getStackTrace()) {
+                FileUtils.writeStringToFile(MpemMod.MPEM_EVENTS_LOG,"\n"+stackTraceElement.toString(),true);
+            }
+            for (Throwable stackTraceElement : e.getSuppressed()) {
+                FileUtils.writeStringToFile(MpemMod.MPEM_EVENTS_LOG,"\n"+stackTraceElement.toString(),true);
+            }
+        } catch (IOException ex) {
+            e.printStackTrace();
+        }
+    }
+
     }
 
     private static String getModIdFromScanData(ModFileScanData scanData) {
@@ -97,7 +112,7 @@ public class ModEventProcessor {
             className = ad.clazz().getClassName();
             Class.forName(className);
             System.out.println("TESTED A CLASS: "+className);
-        } catch (ClassNotFoundException | NoClassDefFoundError | ClassCastException e) {
+        } catch (ClassNotFoundException | ClassCastException | Error e) {
             AsyncEventSystem.LOGGER.debug("Skipped a class.");
             return;
         }
@@ -142,8 +157,15 @@ public class ModEventProcessor {
                 try {
                     Class.forName(className);
                     System.out.println("TESTED A CLASS: "+className);
-                } catch (ClassNotFoundException | NoClassDefFoundError | ClassCastException e) {
+                } catch (ClassNotFoundException | ClassCastException | Error e) {
                     AsyncEventSystem.LOGGER.debug("Skipped a class: {}",className);
+                    FileUtils.writeStringToFile(MpemMod.MPEM_EVENTS_LOG,"\n"+ e,true);
+                    for (StackTraceElement stackTraceElement : e.getStackTrace()) {
+                        FileUtils.writeStringToFile(MpemMod.MPEM_EVENTS_LOG,"\n"+stackTraceElement.toString(),true);
+                    }
+                    for (Throwable stackTraceElement : e.getSuppressed()) {
+                        FileUtils.writeStringToFile(MpemMod.MPEM_EVENTS_LOG,"\n"+stackTraceElement.toString(),true);
+                    }
                     continue;
                 }
 
@@ -170,7 +192,7 @@ public class ModEventProcessor {
                         }
                     }
                 }
-            } catch (NoClassDefFoundError | ClassNotFoundException e) {
+            } catch (ClassNotFoundException | Error e) {
                 if (e.getMessage().contains("client/renderer")) {
                     AsyncEventSystem.LOGGER.warn(CLIENT_ONLY_WARNING + e.getMessage());
                 } else {
