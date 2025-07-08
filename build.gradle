@@ -66,7 +66,7 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 
 dependencies {
-
+     implementation files("lib/com.enderio.enderio-conduits-modded-7.1.8-alpha.jar")
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {

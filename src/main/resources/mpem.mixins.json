@@ -38,6 +38,8 @@
     "EnchantmentMenuMixin",
     "EntityTypeMixin",
     "EventBusMixin",
-    "LevelMixin"
+    "FMLContainerMixin",
+    "LevelMixin",
+    "ModContainerMixin"
   ]
 }

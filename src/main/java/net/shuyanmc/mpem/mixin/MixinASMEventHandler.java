@@ -1,12 +1,12 @@
 package net.shuyanmc.mpem.mixin;
 
 import net.neoforged.bus.ConsumerEventHandler;
-import net.neoforged.bus.api.Event;
 import net.shuyanmc.mpem.MpemMod;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.Redirect;
+
+import java.util.function.Consumer;
 
 @Mixin(value = ConsumerEventHandler.class)
 public class MixinASMEventHandler {
@@ -32,14 +32,15 @@ public class MixinASMEventHandler {
         return DummyHandler.INSTANCE;
     }*/
 
-    @Inject(method = "invoke",at = @At("HEAD"),cancellable = true)
-    public void onInvoke(Event event, CallbackInfo ci){
+    @Redirect(method = "invoke",at = @At(value = "INVOKE", target = "Ljava/util/function/Consumer;accept(Ljava/lang/Object;)V"))
+    public <T> void onInvoke(Consumer instance, T t){
         try {
-            Class.forName(event.getClass().getName());
+            System.out.println(t.getClass().getSimpleName());
+            Class.forName(t.getClass().getName());
+            instance.accept(t);
         }
-        catch (NoClassDefFoundError | ClassNotFoundException e){
+        catch (NoClassDefFoundError | Exception e){
             MpemMod.LOGGER.error("Skipped a event.");
-            ci.cancel();
         }
     }
 }
